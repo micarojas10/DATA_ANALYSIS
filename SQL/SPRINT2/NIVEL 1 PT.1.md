@@ -10,7 +10,7 @@ Primer bloque de ejercicios prácticos de SQL, centrado en el trabajo con el pri
 
 ### Ejercicio 1
 
-Las tablas _company_ y _transactions_ nos muestran un conjunto de datos sobre las compras de diferentes empresas en el mundo. 
+Las tablas _company_, _credit card_ y _transactions_ nos muestran un conjunto de datos sobre las compras de diferentes empresas en el mundo. 
 
 <img width="752" height="329" alt="Captura de pantalla 2026-11-04 a las 22 44 10" src="https://github.com/user-attachments/assets/e9abc768-a88a-4cbe-8a88-b5d836f28729" />
 
