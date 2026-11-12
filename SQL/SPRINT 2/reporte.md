@@ -16,6 +16,7 @@ Primer bloque de ejercicios prácticos de SQL, centrado en el trabajo con el pri
 Se realiza una primera exploración de las tablas company y transaction. Se consultan sus registros y se revisa la estructura de sus campos para reconocer la información disponible y cómo se relacionan las compras con las empresas.
 Las tablas company y transactions nos muestran un conjunto de datos sobre las compras de diferentes empresas en el mundo. 
 
+```sql
 INSERT INTO transaction_products (transaction_id, product_id)
 SELECT
     t.id,
@@ -27,6 +28,7 @@ JSON_TABLE(
         product_id INT PATH '$'
     )
 ) AS p;
+```
 
 
 <img width="492" height="593" alt="Captura de pantalla 2026-11-10 a las 20 43 36" src="https://github.com/user-attachments/assets/8818b56a-c0b0-448e-8880-90d0faf6f56f" />
