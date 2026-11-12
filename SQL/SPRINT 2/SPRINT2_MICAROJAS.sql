@@ -54,7 +54,7 @@ SELECT country
 FROM company
 JOIN transaction
 ON company.id = transaction.company_id
-WHERE amount!=0
+WHERE transaction.declined = "0"
 GROUP BY country;
 
 ## Des de quants països es generen les vendes.
@@ -63,7 +63,7 @@ SELECT COUNT(DISTINCT country) AS total_countries
 FROM company
 JOIN transaction
 ON company.id = transaction.company_id
-WHERE amount!=0;
+WHERE transaction.declined = "0";
 
 ## Identifica la companyia amb la mitjana més gran de vendes.
 
