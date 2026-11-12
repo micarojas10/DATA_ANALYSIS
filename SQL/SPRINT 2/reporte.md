@@ -119,13 +119,220 @@ REFERENCES credit_card(id);
 
 <img width="1048" height="667" alt="Captura de pantalla 2026-11-12 a las 22 19 03" src="https://github.com/user-attachments/assets/733686f5-8b6c-4d79-b2f1-0def457df714" />
 
-Los datos de esta nueva tabla nos muestran los diferentes datos de cada tarjeta de crédito utilizada para las transferencias en transactions que usan las diferentes empresas. Esta se relaciona con el _card_id_ que se utiliza en transacciones, siendo asi la FK en ella y la PK en _credit_card_.
+Los datos de esta nueva tabla nos muestran los diferentes datos de cada tarjeta de crédito utilizada para las transferencias en transactions que usan las diferentes empresas. Esta se relaciona con el _card_id_ que se utiliza en transacciones, siendo asi la FK en ella y la PK en _credit_card_. Esto formara un modelo de estrella, siendo la central la tabla _transactions_. 
 
 <img width="752" height="329" alt="Captura de pantalla 2026-11-04 a las 22 44 10" src="https://github.com/user-attachments/assets/ab8cf3b7-0919-4037-9a06-d2d95c6ff28c" />
 
 ### Ejercicio 5
 
 Se actualiza el IBAN de una tarjeta concreta mediante UPDATE, utilizando el identificador de la tarjeta en la condición WHERE. Después se consulta el registro para comprobar el cambio.
+
+<img width="1053" height="667" alt="Captura de pantalla 2026-11-12 a las 22 25 06" src="https://github.com/user-attachments/assets/e21e0b58-168e-4ef4-a7c2-193f9bb0cc0a" />
+
+### Ejercicio 6
+
+Se insertan nuevos registros en las tablas credit_card, company y transaction. El ejercicio permite practicar INSERT y comprobar que los registros relacionados se incorporan correctamente.
+
+<img width="1053" height="667" alt="Captura de pantalla 2026-11-12 a las 22 26 31" src="https://github.com/user-attachments/assets/bafa810f-f6a5-4f28-9d69-cb905a8cd742" />
+
+### Ejercicio 7
+
+Se modifica la estructura de credit_card eliminando la columna pan mediante ALTER TABLE y DROP COLUMN. Finalmente, se comprueba la estructura actualizada de la tabla.
+
+<img width="1057" height="536" alt="Captura de pantalla 2026-11-12 a las 22 28 00" src="https://github.com/user-attachments/assets/7aa2d17c-071b-4088-84ae-5d38bb107a39" />
+
+## Parte 2 – Ejercicios 8 al 10
+
+Segundo bloque de ejercicios, desarrollado a partir de un conjunto de datos diferente.
+
+En esta parte se trabaja con la creación e importación de tablas, la transformación de datos y el diseño de un modelo dimensional mediante un esquema en estrella (*Star Schema*).
+
+### Ejercicio 8 
+
+Se construye un modelo dimensional en estrella a partir de los archivos CSV. Se crean e importan las tablas de dimensiones y la tabla de hechos, se transforman los campos necesarios y se definen las relaciones entre ellas.
+
+Comenzamos creando la nueva database y la primera tabla de datos de usuarios _dim_user_:
+
+<img width="1053" height="667" alt="Captura de pantalla 2026-11-12 a las 22 30 24" src="https://github.com/user-attachments/assets/beff31e2-6515-4e8e-a7a7-d53023a06991" />
+
+
+para esto, utilizamos primero tablas borrador para la importación de los usuarios americanos y europeos:
+
+```sql
+/* tenemos que crear tablas temporales para cada continente para despues unirlos en dim_user*/
+
+CREATE TABLE stg_american_users (
+    id INT,
+    name VARCHAR(100),
+    surname VARCHAR(100),
+    phone VARCHAR(30),
+    email VARCHAR(150),
+    birth_date VARCHAR(30),
+    country VARCHAR(100),
+    city VARCHAR(100),
+    postal_code VARCHAR(20),
+    address VARCHAR(255),
+    signup_date VARCHAR(30),
+    user_segment VARCHAR(50),
+    income_band VARCHAR(30)
+);
+
+CREATE TABLE stg_european_users (
+    id INT,
+    name VARCHAR(100),
+    surname VARCHAR(100),
+    phone VARCHAR(30),
+    email VARCHAR(150),
+    birth_date VARCHAR(30),
+    country VARCHAR(100),
+    city VARCHAR(100),
+    postal_code VARCHAR(20),
+    address VARCHAR(255),
+    signup_date VARCHAR(30),
+    user_segment VARCHAR(50),
+    income_band VARCHAR(30)
+);
+```
+
+Cargamos los datos:
+
+<img width="1057" height="560" alt="Captura de pantalla 2026-11-12 a las 22 33 22" src="https://github.com/user-attachments/assets/65119baf-66d1-4bb1-a446-85bc32fe903f" />
+
+Comprobamos que los usuarios americanos son de un total de 1010 y los europeos de 3990. 
+
+Despues procedemos a insertar ambas tablas en _dim_user_, por ejemplo la de Europa a continuación:
+
+<img width="1202" height="667" alt="Captura de pantalla 2026-11-12 a las 22 36 09" src="https://github.com/user-attachments/assets/3ceb8637-09cc-43da-aee0-96f300c6fabf" />
+
+Vemos 5000 usuarios en total con sus diferentes datos, localizaciones, vías de contacto y capacidad de compra. 
+
+Procedemos con la creación de las tablas de 100 empresas, _dim_company_:
+
+```sql
+CREATE TABLE dim_company (
+    company_id VARCHAR(20) PRIMARY KEY,
+    company_name VARCHAR(150),
+    phone VARCHAR(30),
+    email VARCHAR(150),
+    country VARCHAR(100),
+    website VARCHAR(255),
+    merchant_category VARCHAR(100),
+    merchant_price_position VARCHAR(50)
+);
+```
+
+<img width="1202" height="580" alt="Captura de pantalla 2026-11-12 a las 22 40 58" src="https://github.com/user-attachments/assets/bce0a093-a9f3-4b50-91cc-3b2b21dfb663" />
+
+
+Ahora la dimensión de metodo de pago: _dim_credit_card_:
+
+```sql
+CREATE TABLE dim_credit_card (
+    id VARCHAR(20) PRIMARY KEY,
+    user_id INT,
+    iban VARCHAR(40),
+    pan VARCHAR(30),
+    pin VARCHAR(10),
+    cvv VARCHAR(10),
+    track1 TEXT,
+    track2 TEXT,
+    expiring_date DATE,
+    card_type VARCHAR(50),
+    card_renewal_flag TINYINT
+);
+```
+
+Observamos 5000 observaciones de estas:
+
+<img width="1202" height="534" alt="Captura de pantalla 2026-11-12 a las 22 45 15" src="https://github.com/user-attachments/assets/bcd94133-9026-4ff9-adb1-ac5bfa1cbc67" />
+
+La siguiente tabla ser fundamental para relacionar las demás tablas, ya que es la base de todas las foreign keys; la tabla _fact_transaction_ : 
+Dada la cantidad de datos y para garantizar una visualización y búsqueda rápida, creamos indices de las columnas que serian mas usadas en este tipo de relaciones de datos. 
+
+```sql
+CREATE TABLE fact_transaction (
+    id CHAR(36) PRIMARY KEY,
+    card_id VARCHAR(20),
+    business_id VARCHAR(20),
+    transaction_timestamp DATETIME,
+    amount DECIMAL(12,2),
+    declined TINYINT,
+    product_ids TEXT,
+    user_id INT,
+    lat DECIMAL(10,7),
+    longitude DECIMAL(10,7),
+    discount_amount DECIMAL(12,2),
+    tax_amount DECIMAL(12,2),
+    shipping_amount DECIMAL(12,2),
+    channel VARCHAR(50),
+    campaign_id VARCHAR(100),
+    device_type VARCHAR(50),
+    is_international BOOLEAN,
+    decline_reason VARCHAR(255),
+    distance_km DECIMAL(12,2),
+
+    INDEX idx_card_id (card_id),
+    INDEX idx_business_id (business_id),
+    INDEX idx_user_id (user_id)
+);
+```
+
+Recibimos warnings a la hora de cargar los datos de transacciones, pero al comprobar, vemos que todo esta correcto:
+
+<img width="1202" height="522" alt="Captura de pantalla 2026-11-12 a las 22 49 49" src="https://github.com/user-attachments/assets/c95e35a4-6473-4c27-a6e7-fd5b8ba74de3" />
+
+
+Una vez creadas las tablas fundamentales de nuestros datos de usuarios, transacciones, tarjetas de crédito y empresas, procedemos a crear las relaciones correspondientes: 
+
+```sql
+#entre tarjetas y usuarios
+
+ALTER TABLE dim_credit_card
+ADD CONSTRAINT fk_credit_card_user
+FOREIGN KEY (user_id) REFERENCES dim_user(id);
+
+#entre transacciones y las tarjetas
+
+ALTER TABLE fact_transaction
+ADD CONSTRAINT fk_transaction_card
+FOREIGN KEY (card_id) REFERENCES dim_credit_card(id);
+
+#entre transacciones y empresas
+
+ALTER TABLE fact_transaction
+ADD CONSTRAINT fk_transaction_company
+FOREIGN KEY (business_id) REFERENCES dim_company(company_id);
+
+#entre transacciones y usuarios:
+
+ALTER TABLE fact_transaction
+ADD CONSTRAINT fk_transaction_user
+FOREIGN KEY (user_id) REFERENCES dim_user(id);
+```
+<img width="1197" height="146" alt="Captura de pantalla 2026-11-12 a las 22 54 14" src="https://github.com/user-attachments/assets/a27ec139-e635-416f-9267-15d3570315b3" />
+
+Nuestro diagrama es un modelo de estrella, siendo la tabla de hechos la dimensión de transacciones:
+
+<img width="888" height="660" alt="Captura de pantalla 2026-11-09 a las 11 01 21" src="https://github.com/user-attachments/assets/279b1f96-d897-4292-9a89-4d17137d461f" />
+
+### Ejercicio 9
+
+Se utiliza una subconsulta que cuenta las transacciones por usuario. Después se relaciona ese resultado con dim_user para mostrar los usuarios que han realizado más de 80 transacciones.
+
+
+<img width="1202" height="623" alt="Captura de pantalla 2026-11-12 a las 22 57 23" src="https://github.com/user-attachments/assets/a8891806-3582-4d65-b4d0-bbeaed4243bb" />
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
