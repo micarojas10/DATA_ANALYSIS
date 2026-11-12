@@ -1,4 +1,4 @@
-Micaela Rojas - Especialización Análisis de Datos
+## Micaela Rojas - Especialización Análisis de Datos
 
 Corrector: Marc Ponce
 Contenidos: SQL niveles 1,2 y 3
@@ -456,6 +456,12 @@ JSON_TABLE(
 
 Usamos las tablas creadas e intermedias para observar que el producto mas vendido es el de la primera fila:
 <img width="1202" height="648" alt="Captura de pantalla 2026-11-12 a las 23 26 53" src="https://github.com/user-attachments/assets/2869f7fb-cfee-4f39-914a-a2313ad62e1f" />
+
+
+El resultado final de relaciones del database _transaction_star_ es el siguiente: 
+
+<img width="942" height="699" alt="Captura de pantalla 2026-11-12 a las 23 38 38" src="https://github.com/user-attachments/assets/eb392b52-47ab-4a36-8731-4e5ddb5ffd86" />
+
 
 
 
