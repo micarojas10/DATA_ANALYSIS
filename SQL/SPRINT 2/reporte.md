@@ -3,7 +3,7 @@
 Corrector: Marc Ponce
 Contenidos: SQL niveles 1,2 y 3
 
-# SPRINT 2 - SQL, INFORME DE EJERICIOS 
+# SPRINT 2 - SQL, INFORME DE EJERCICOS 
 
 SPRINT 2  |  SQLPresentación
 Este documento reúne los ejercicios prácticos realizados durante el Sprint 2 del curso de especialización en Data Analysis. El trabajo se organiza por niveles e incluye consultas SQL, operaciones sobre tablas, creación de vistas y tablas, relaciones entre datos y un modelo dimensional. Cada ejercicio incorpora una breve explicación y capturas de MySQL Workbench que muestran el desarrollo y los resultados obtenidos.
