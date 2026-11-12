@@ -323,7 +323,139 @@ Se utiliza una subconsulta que cuenta las transacciones por usuario. Después se
 <img width="1202" height="623" alt="Captura de pantalla 2026-11-12 a las 22 57 23" src="https://github.com/user-attachments/assets/a8891806-3582-4d65-b4d0-bbeaed4243bb" />
 
 
+### Ejercicio 10
 
+Se calcula la media del importe de las transacciones por IBAN para las tarjetas que han realizado compras en la empresa Donec Ltd. Para ello se relacionan las tablas de tarjetas y transacciones y se filtra la empresa mediante una subconsulta.
+
+
+<img width="1202" height="623" alt="Captura de pantalla 2026-11-12 a las 23 05 04" src="https://github.com/user-attachments/assets/f570e785-fc39-4b04-b22e-78bc57700cdf" />
+
+## SQL – Nivel 2
+
+Segundo bloque de ejercicios prácticos de SQL, centrado en el trabajo con el segundo conjunto de datos.
+
+### Ejercicio 1
+
+Se agrupan las transacciones por día y se suman sus importes para obtener los cinco días con mayores ingresos. El resultado se ordena de mayor a menor total de ventas.
+
+<img width="1186" height="540" alt="Captura de pantalla 2026-11-12 a las 23 07 54" src="https://github.com/user-attachments/assets/3aeb0917-6156-4a64-8dc6-9bb3e1698e62" />
+
+### Ejercicio 2
+
+Se muestran los datos de las empresas que realizaron transacciones de entre 350 y 400 euros en cualquiera de las tres fechas indicadas. Se combinan las condiciones de importe y fecha y se ordenan los resultados por importe descendente.
+
+<img width="1202" height="631" alt="Captura de pantalla 2026-11-12 a las 23 08 41" src="https://github.com/user-attachments/assets/6e0eaf4a-4ce2-4b65-a804-2e21a75b7df3" />
+
+
+### Ejercicio 3
+
+Se cuenta el número de transacciones de cada empresa y se clasifica cada una según alcance o no las 400 operaciones. Para incluir también empresas sin transacciones se utiliza LEFT JOIN.
+
+<img width="1202" height="631" alt="Captura de pantalla 2026-11-12 a las 23 12 00" src="https://github.com/user-attachments/assets/93dbba41-e319-4756-9faa-27661ff94242" />
+
+
+### Ejercicio 4
+
+Se elimina de fact_transaction únicamente el registro cuyo identificador coincide con el indicado en el enunciado. La condición WHERE limita la operación al registro solicitado.
+
+<img width="1202" height="571" alt="Captura de pantalla 2026-11-12 a las 23 13 30" src="https://github.com/user-attachments/assets/ce39c412-69ff-47ad-90c2-b6159c492983" />
+
+
+### Ejercicio 5
+
+Se crea la vista VistaMarketing con el nombre, teléfono y país de cada empresa, junto con la media del importe de sus transacciones. Los resultados se agrupan por empresa y se ordenan por la media de compra.
+
+<img width="1540" height="949" alt="Captura de pantalla 2026-11-12 a las 23 14 31" src="https://github.com/user-attachments/assets/46fc59fe-9e7a-4edd-87c2-ac7383c572ab" />
+
+
+## SQL – Nivel 3
+
+### Ejercicio 1
+
+Se determina el estado de cada tarjeta a partir de sus tres transacciones más recientes. ROW_NUMBER() ordena las operaciones por tarjeta y fecha; después se comprueba cuántas fueron rechazadas y se asigna el estado ACTIVA o INACTIVA. El resultado se guarda en una tabla.
+
+<img width="1142" height="664" alt="Captura de pantalla 2026-11-12 a las 23 16 33" src="https://github.com/user-attachments/assets/5f145692-0f13-4c4e-ab47-a54a5c8c3a12" />
+
+creamos la tabla de estado de tarjeta:
+
+```sql
+CREATE TABLE card_status AS
+WITH tt AS (
+SELECT
+    card_id,
+    transaction_timestamp,
+    declined,
+    ROW_NUMBER() OVER (
+        PARTITION BY card_id
+        ORDER BY transaction_timestamp DESC
+    ) AS num_transaccion
+FROM fact_transaction)
+SELECT 
+	card_id, 
+    CASE
+		WHEN SUM(declined) = 3 THEN 'INACTIVA'
+		ELSE 'ACTIVA'
+	END AS estado
+FROM tt
+WHERE num_transaccion < 4
+GROUP BY card_id;
+```
+
+<img width="1136" height="391" alt="Captura de pantalla 2026-11-12 a las 23 18 24" src="https://github.com/user-attachments/assets/d7ec8d76-c7f4-49ff-9276-4416faf2d29f" />
+
+Vemos que todas las tarjetas están activadas, las 5000!
+
+
+### Ejercicio 2
+
+Se separan los identificadores incluidos en product_ids para obtener una fila por producto y transacción. Después se relacionan los datos con la tabla products mediante una tabla intermedia y se cuenta cuántas veces aparece vendido cada producto.
+
+```sql
+CREATE TABLE products (
+    id INT PRIMARY KEY,
+    product_name VARCHAR(150),
+    price DECIMAL(10,2),
+    colour VARCHAR(20),
+    weight DECIMAL(10,2),
+    warehouse_id VARCHAR(20),
+    category VARCHAR(100),
+    brand VARCHAR(100),
+    cost DECIMAL(10,2),
+    launch_date DATE
+);
+```
+
+<img width="1131" height="429" alt="Captura de pantalla 2026-11-12 a las 23 19 54" src="https://github.com/user-attachments/assets/db0efad8-b399-4d01-9e89-6ee6473ce871" />
+
+creación de tabla intermedia: 
+```sql
+CREATE TABLE transaction_products (
+    transaction_id CHAR(36),
+    product_id INT,
+    PRIMARY KEY (transaction_id, product_id),
+    FOREIGN KEY (transaction_id) REFERENCES fact_transaction(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+```
+
+Hemos de separar la columna de productos, ya que los productos se encuentran todos juntos en formato de Texto, para eso usamos JSON;
+
+```sql
+INSERT INTO transaction_products (transaction_id, product_id)
+SELECT
+    t.id,
+    p.product_id
+FROM fact_transaction t,
+JSON_TABLE(
+    CONCAT('[', t.product_ids, ']'),
+    '$[*]' COLUMNS (
+        product_id INT PATH '$'
+    )
+) AS p;
+```
+
+Usamos las tablas creadas e intermedias para observar que el producto mas vendido es el de la primera fila:
+<img width="1202" height="648" alt="Captura de pantalla 2026-11-12 a las 23 26 53" src="https://github.com/user-attachments/assets/2869f7fb-cfee-4f39-914a-a2313ad62e1f" />
 
 
 
