@@ -50,6 +50,8 @@ En el ejercicio A utilizamos IA para poder diseñar el codigo de copia de tabla 
 
  <img width="1470" height="956" alt="Captura de pantalla 2026-11-17 a las 11 43 00" src="https://github.com/user-attachments/assets/dfc0cae9-aaf8-4d10-87bd-e9b6d2540f7c" />
 
+
+
 En el ejercicio B utilizamos dos códigos para comparar la cantidad de bytes procesadas dependiendo de las tablas que se usen (nativas o externas);
 
 <img width="1470" height="956" alt="Captura de pantalla 2026-11-17 a las 12 31 43" src="https://github.com/user-attachments/assets/13513ec3-69f5-43c3-9319-79a32ff03373" />
@@ -57,6 +59,8 @@ En el ejercicio B utilizamos dos códigos para comparar la cantidad de bytes pro
 <img width="1470" height="956" alt="Captura de pantalla 2026-11-17 a las 12 32 08" src="https://github.com/user-attachments/assets/65563ed9-6382-4828-9c7f-be5d928ab7f1" />
 
 El nativo es mucho más eficiente en cuanto a costos, gasta tres veces menos aproximadamente (de 3 a 12). Por lo tanto, usar datos externos no optimiza el consumo de bytes, aun asi los bytes facturados no tienen mucha diferencia, ya que pasamos de 10 a 13. Las tablas externas dependen de archivos almacenados en Cloud Storage y pueden tener limitaciones de rendimiento y estimación de costes más altos.
+
+
 
 En el ejercicio C comprobamos las estimaciones de gastos de LIMIT comparándolo tambien en ambas tablas (externa o nativa):
 
