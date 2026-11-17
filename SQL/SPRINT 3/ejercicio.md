@@ -66,12 +66,9 @@ En el ejercicio C comprobamos las estimaciones de gastos de LIMIT comparándolo 
 
 <img width="1031" height="334" alt="Captura de pantalla 2026-11-17 a las 12 48 15" src="https://github.com/user-attachments/assets/edd9f977-5b0e-4525-a2b1-bfcd8766361f" />
 
-<img width="1029" height="339" alt="Captura de pantalla 2026-11-17 a las 12 48 36" src="https://github.com/user-attachments/assets/4e3e0d56-3d98-451d-be93-e747adbe5ee5" />
-
-<img width="1470" height="956" alt="Captura de pantalla 2026-11-17 a las 12 49 01" src="https://github.com/user-attachments/assets/07745ebb-d3b3-4236-ba6c-22c1cece550d" />
-
 <img width="1032" height="341" alt="Captura de pantalla 2026-11-17 a las 12 49 36" src="https://github.com/user-attachments/assets/e1d35eb5-1fd6-4f5b-9dd5-dd2a573526cb" />
 
+<img width="1470" height="956" alt="Captura de pantalla 2026-11-17 a las 12 49 01" src="https://github.com/user-attachments/assets/07745ebb-d3b3-4236-ba6c-22c1cece550d" />
 
 
 
