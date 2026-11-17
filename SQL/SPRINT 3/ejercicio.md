@@ -71,6 +71,14 @@ En el ejercicio C comprobamos las estimaciones de gastos de LIMIT comparándolo 
 
 <img width="1470" height="956" alt="Captura de pantalla 2026-11-17 a las 12 49 01" src="https://github.com/user-attachments/assets/07745ebb-d3b3-4236-ba6c-22c1cece550d" />
 
+Como podemos observar, el uso de LIMIT no rebaja ni ahora bytes facturados ni procesados. Pero al procesar solo una columna de la tabla de datos, observamos cierta reducción en la cantidad de bytes.
+
+A continuación, observamos el análisis y comparación pero con los datos nativos;
+
+<img width="1029" height="345" alt="Captura de pantalla 2026-11-17 a las 12 50 18" src="https://github.com/user-attachments/assets/cf5057a9-5c52-4c80-a11b-c68f69233a8c" />
+
+Podemos observar que usando la base de datos nativo se usa menos bytes, básicamente lo que sucede (en vocabulario técnico) es que en tablas nativas, BigQuery almacena los datos en formato columnar y puede aprovechar esa organización para leer solo las columnas solicitadas. En tablas externas CSV, los datos están almacenados en archivos de texto. BigQuery no puede aprovechar la misma organización columnar, por lo que seleccionar una columna puede seguir requiriendo leer gran parte del archivo. 
+Seleccionar las columnas necesarias reduce el uso de lectura.
 
 
 
