@@ -1,7 +1,8 @@
 ## Micaela Rojas - Especialización Análisis de Datos
 
 Corrector:
-Contenidos: SQL niveles 1 y 2
+
+Contenidos: BIG QUERY + SQL niveles 1 y 2
 
 # SPRINT 3 - BIG QUERY, INFORME DE EJERCICIOS 
 
