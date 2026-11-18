@@ -84,8 +84,27 @@ Seleccionar las columnas necesarias reduce el uso de lectura.
 
 ### Ejercicio 5
 
+Verificamos el formato de DATA en la tabla de transacciones.
+Los 5 dias con mas ingresos del 2021:
+
+<img width="883" height="613" alt="Captura de pantalla 2026-11-18 a las 11 29 03" src="https://github.com/user-attachments/assets/7f93c768-5615-4878-b235-8bf77e8722ae" />
+
 
 ### Ejercicio 6
+
+Informe donde cruzamos datos:
+
+<img width="1470" height="956" alt="Captura de pantalla 2026-11-18 a las 11 44 38" src="https://github.com/user-attachments/assets/d4bf4453-5f07-440b-b3e3-cf900e4c771e" />
+
+
+## BQ – Nivel 2
+
+En esta sección se recogen los ejercicios prácticos de Big Query correspondientes al segundo nivel de la formación en Data Analytics aprendiendo métodos ELT.
+
+### Ejercicio 1
+
+
+
 
 
 
