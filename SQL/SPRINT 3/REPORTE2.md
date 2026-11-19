@@ -216,6 +216,7 @@ Descargamos en formato CSV y verificamos los datos en el programa Numbers:
 
 
 
+VINCULO BIG QUERY SQL: https://console.cloud.google.com/bigquery?ws=!1m7!1m6!12m5!1m3!1ssprint3-analytics-mica!2seurope-southwest1!3s9efa3aa3-fc6a-4939-84df-1b9ba9075228!2e1 
 
 
 
