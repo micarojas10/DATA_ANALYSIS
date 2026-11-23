@@ -159,11 +159,11 @@ En esta sección se recogen los ejercicios prácticos de Big Query correspondien
 
 Creación de vista para Marketing de clientes de manera segmentada por media de compra:
 
-<img width="1470" height="956" alt="Captura de pantalla 2026-11-19 a las 11 41 59" src="https://github.com/user-attachments/assets/6368e189-3b0b-4cdc-90e5-8b0bd4da9eb9" />
+<img width="1470" height="956" alt="Captura de pantalla 2026-11-23 a las 11 08 56" src="https://github.com/user-attachments/assets/4c9db6f9-4610-4f0c-8c9e-223d7dffa1b4" />
 
-<img width="1470" height="956" alt="Captura de pantalla 2026-11-19 a las 11 46 01" src="https://github.com/user-attachments/assets/2cd0684d-a107-4820-bdc7-ad970b3dcef6" />
+<img width="1470" height="956" alt="Captura de pantalla 2026-11-23 a las 11 09 37" src="https://github.com/user-attachments/assets/eb06c565-44ac-4db5-85c3-b2c0c79fedbe" />
 
-
+*corrección: añadir id de compañías.
 
 ### Ejercicio 2
 
