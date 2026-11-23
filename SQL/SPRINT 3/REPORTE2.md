@@ -1,6 +1,6 @@
 ## Micaela Rojas - Especialización Análisis de Datos
 
-Corrector:
+Corrector: GABRIELLA NOGUEIRA ALVES
 
 Contenidos: BIG QUERY + SQL niveles 1 y 2
 
