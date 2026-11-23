@@ -96,6 +96,8 @@ Informe donde cruzamos datos:
 
 <img width="1470" height="956" alt="Captura de pantalla 2026-11-18 a las 11 44 38" src="https://github.com/user-attachments/assets/d4bf4453-5f07-440b-b3e3-cf900e4c771e" />
 
+NO utilizamos declined = 0 porque usamos transacciones y no ventas. 
+
 
 ## BQ – Nivel 2
 
