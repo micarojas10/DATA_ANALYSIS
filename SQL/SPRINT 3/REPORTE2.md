@@ -2,7 +2,7 @@
 
 Corrector: GABRIELLA NOGUEIRA ALVES
 
-Contenidos: BIG QUERY + SQL niveles 1 y 2
+Contenidos: BIG QUERY + SQL niveles 1,2 y 3
 
 # SPRINT 3 - BIG QUERY, INFORME DE EJERCICIOS 
 
