@@ -15,6 +15,23 @@ En esta sección se recogen los ejercicios prácticos de Big Query correspondien
 
 ### Ejercicio 1: Consulta sobre Taula no Optimitzada (Diagnòstic)
 
+```sql
+SELECT
+  t.*,
+  c.company_name,
+  c.country
+FROM
+  `sprint3-analytics-mica.sprint3_silver.transactions_clean` AS t
+INNER JOIN
+  `sprint3-analytics-mica.sprint3_silver.companies_clean` AS c
+ON
+  t.business_id = c.company_id
+WHERE
+  DATE(t.timestamp) = DATE '2022-03-12'
+  AND c.country = 'Germany';
+```
+<img width="1470" height="956" alt="Captura de pantalla 2026-11-24 a las 13 12 47" src="https://github.com/user-attachments/assets/f29907af-da3e-4c61-955d-e6ae092d74b6" />
+
 
 ### Ejercicio 2: Re-arquitectura i Optimització de l'Emmagatzematge (Partition & Cluster)
 
