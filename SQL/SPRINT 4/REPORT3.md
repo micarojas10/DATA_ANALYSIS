@@ -45,6 +45,14 @@ WHERE
 #### Pas 1 (Taula no optimitzada)
 #### Pas 2 (Taula optimitzada)
 
+\[
+\text{Ahorro (\%)} =
+\frac{\text{Bytes sin optimizar}-\text{Bytes optimizados}}
+{\text{Bytes sin optimizar}}\times100
+\]
+
+
+
 ### Ejercicio 4: Smart Caching (Vistes Materialitzades)
 
 ## Nivell 2: SQL Analític Avançat
