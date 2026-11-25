@@ -37,22 +37,100 @@ WHERE
 
 #### Pas 1: Generació de Dades Recents (Mocking Data) 
 
+<img width="1436" height="946" alt="Captura de pantalla 2026-11-24 a las 13 30 41" src="https://github.com/user-attachments/assets/0fc6b4b0-7e51-4f82-9a3b-d450af68a9c0" />
+
+<img width="891" height="426" alt="Captura de pantalla 2026-11-24 a las 13 31 54" src="https://github.com/user-attachments/assets/fe4cf181-5cd0-452a-9bda-76d1132294c9" />
+
+
 #### Pas 2: Creació de la Taula Optimitzada (Partitioning & Clustering) 
+
+<img width="1470" height="920" alt="Captura de pantalla 2026-11-25 a las 10 09 36" src="https://github.com/user-attachments/assets/8cc6f2b9-5697-443a-9bfb-2b6d53503988" />
+
+<img width="1470" height="920" alt="Captura de pantalla 2026-11-25 a las 10 14 32" src="https://github.com/user-attachments/assets/eb31913a-dbd8-4cc9-a8b4-f674cdd2e262" />
 
 
 ### Ejercicio 3: La Prova del Cotó (Benchmark)
 
 #### Pas 1 (Taula no optimitzada)
+
+<img width="637" height="297" alt="Captura de pantalla 2026-11-25 a las 10 21 05" src="https://github.com/user-attachments/assets/32dcd872-20e8-49fe-9753-b79787faa848" />
+
 #### Pas 2 (Taula optimitzada)
 
-\[
-\text{Ahorro (\%)} =
-\frac{\text{Bytes sin optimizar}-\text{Bytes optimizados}}
-{\text{Bytes sin optimizar}}\times100
-\]
+<img width="585" height="319" alt="Captura de pantalla 2026-11-25 a las 10 21 24" src="https://github.com/user-attachments/assets/16facce6-9c9a-492c-88f4-a078c35dfd5c" />
 
+
+Ahorro (%) = ((Bytes sin optimizar-Bytes optimizados) / Bytes sin optimizar)* 100 = ((11.85 - 6.99)/11.85)*100= 41 %
 
 
 ### Ejercicio 4: Smart Caching (Vistes Materialitzades)
 
+<img width="1470" height="920" alt="Captura de pantalla 2026-11-25 a las 10 40 36" src="https://github.com/user-attachments/assets/780b9480-284c-4681-a144-ae44a7475e4c" />
+
+<img width="1470" height="920" alt="Captura de pantalla 2026-11-25 a las 10 44 09" src="https://github.com/user-attachments/assets/decee712-e0b1-4421-b429-2895e97048f3" />
+
+<img width="1470" height="920" alt="Captura de pantalla 2026-11-25 a las 10 44 24" src="https://github.com/user-attachments/assets/d2d351f9-7152-4364-adf4-0fa406773382" />
+
+
 ## Nivell 2: SQL Analític Avançat
+
+### EJERCICIO 1: Perfilat de Clients VIP (Mètriques Agregades amb CTEs)
+
+```sql
+
+WITH vip_stats AS (
+  SELECT
+    user_id,
+    SUM(amount) AS despesa_total,
+    COUNT(*) AS num_trans,
+    ROUND(AVG(amount), 2) AS tiquet_mig,
+    MAX(amount) AS max_compra
+  FROM `sprint3-analytics-mica.sprint3_silver.transactions_clean`
+  WHERE declined = 0
+  GROUP BY user_id
+  HAVING despesa_total > 500
+)
+
+SELECT
+  v.user_id,
+  CONCAT(u.name, ' ', u.surname) AS nom_complet,
+  u.email,
+  v.num_trans,
+  v.tiquet_mig,
+  v.max_compra,
+  v.despesa_total
+FROM vip_stats AS v
+INNER JOIN `sprint3-analytics-mica.sprint3_silver.users_combined` AS u
+ON v.user_id = u.user_id
+ORDER BY v.despesa_total DESC;
+```
+
+
+### EJERCICIO 2: Anàlisi de Tendències (Window Functions sobre Vistes)
+
+```sql
+WITH daily_comparison AS (
+  SELECT
+    sale_date AS Data,
+    total_sales AS Vendes_Avui,
+    LAG(total_sales) OVER (
+      ORDER BY sale_date
+    ) AS Vendes_Ahir
+  FROM `sprint3-analytics-mica.sprint3_gold.mv_daily_sales`
+)
+
+SELECT
+  Data,
+  Vendes_Avui,
+  Vendes_Ahir,
+  ROUND(
+    SAFE_DIVIDE( Vendes_Avui - Vendes_Ahir, Vendes_Ahir) * 100, 2
+  ) AS Diff_Percentual
+FROM daily_comparison
+ORDER BY Data;
+```
+
+### EJERCICIO 3: Totals Acumulats (Running Totals sobre Vistes)
+
+
+
