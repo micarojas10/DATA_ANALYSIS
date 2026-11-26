@@ -134,3 +134,63 @@ ORDER BY Data;
 
 
 
+### EJERCICIO 4:
+
+Usaremos las funciones mencionadas en el enunciado y ```sql IF(condición, valor_si_verdadero, valor_si_falso) ```
+
+```sql
+WITH first_three_purchases AS (
+  SELECT
+    transaction_id,
+    user_id,
+    timestamp,
+    amount,
+    ROW_NUMBER() OVER (
+      PARTITION BY user_id
+      ORDER BY timestamp, transaction_id
+    ) AS num_compra
+  FROM
+    `sprint3-analytics-mica.sprint3_silver.transactions_clean`
+  WHERE
+    declined = 0
+  QUALIFY
+    num_compra <= 3
+),
+
+user_metrics AS (
+  SELECT
+    user_id,
+    ROUND(AVG(amount), 2) AS mitjana_3_primeres,
+    MAX(IF(num_compra = 3, DATE(timestamp), NULL)) AS data_tercera_compra,
+    MAX(IF(num_compra = 3, amount, NULL)) AS import_tercera_compra
+  FROM
+    first_three_purchases
+  GROUP BY
+    user_id
+  HAVING
+    COUNT(*) = 3
+)
+
+SELECT
+  m.user_id,
+  CONCAT(u.name, ' ', u.surname) AS nom_complet,
+  u.email,
+  m.data_tercera_compra,
+  m.import_tercera_compra,
+  m.mitjana_3_primeres
+FROM
+  user_metrics AS m
+INNER JOIN
+  `sprint3-analytics-mica.sprint3_silver.users_combined` AS u
+ON
+  m.user_id = u.user_id
+ORDER BY
+  m.data_tercera_compra;
+```
+
+Tenemos tres apartados del anterior comando de SQL:
+
+
+
+
+
