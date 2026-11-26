@@ -205,6 +205,37 @@ Tenemos tres apartados del anterior comando de SQL:
 
 <img width="1470" height="920" alt="Captura de pantalla 2026-11-25 a las 22 23 51" src="https://github.com/user-attachments/assets/fca1230f-d1a0-43af-a240-0321924211ab" />
 
+## Nivel 3: Analytics Engineering (Arrays & Automatització)
+
+### Ejercicio 1: Desanidament i Aplanament de Dades (Unnesting)
+
+<img width="1470" height="920" alt="Captura de pantalla 2026-11-26 a las 10 59 30" src="https://github.com/user-attachments/assets/79ef984e-6129-4efb-aa60-62109f4c2637" />
+
+<img width="1470" height="920" alt="Captura de pantalla 2026-11-26 a las 11 04 40" src="https://github.com/user-attachments/assets/8d6bd777-5c23-4513-b1ec-2e19412e7fcf" />
+
+Comprobación de orden de productos por transacciones: 
+
+<img width="1470" height="920" alt="Captura de pantalla 2026-11-26 a las 11 04 32" src="https://github.com/user-attachments/assets/cc1da25c-d00e-4a56-8813-755909b5cb9d" />
+
+### Ejercicio 2: El Rànquing de Vendes (Agregació Simple)
+
+<img width="1470" height="920" alt="Captura de pantalla 2026-11-26 a las 11 08 23" src="https://github.com/user-attachments/assets/f49a9792-c77e-4701-8498-a6ebbdeee839" />
+
+
+### Ejercicio 3: Automatització del Pipeline i Visualització
+
+<img width="1470" height="920" alt="Captura de pantalla 2026-11-26 a las 11 48 52" src="https://github.com/user-attachments/assets/29e2f912-44f3-44cc-b486-27f67c1e21cb" />
+
+<img width="654" height="405" alt="Captura de pantalla 2026-11-26 a las 11 49 50" src="https://github.com/user-attachments/assets/e2f22ccb-ad19-4c30-8873-d815e8699323" />
+
+<img width="1470" height="920" alt="Captura de pantalla 2026-11-26 a las 11 51 53" src="https://github.com/user-attachments/assets/382a4a30-e391-4bd7-b7d1-18e3252c2845" />
+
+
+
+
+
+
+
 
 
 
