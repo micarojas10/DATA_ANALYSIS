@@ -1,6 +1,6 @@
 ## Micaela Rojas - Especialización Análisis de Datos
 
-Corrector:
+Corrector: ALEJANDRO PEREYRA
 
 Contenidos: BIG QUERY + LOOKER STUDIO
 
@@ -32,6 +32,7 @@ WHERE
 ```
 <img width="1470" height="956" alt="Captura de pantalla 2026-11-24 a las 13 12 47" src="https://github.com/user-attachments/assets/f29907af-da3e-4c61-955d-e6ae092d74b6" />
 
+Podemos ver debajo la cantidad de MB que podrían ser procesados (Dry Run). 
 
 ### Ejercicio 2: Re-arquitectura i Optimització de l'Emmagatzematge (Partition & Cluster)
 
@@ -61,6 +62,8 @@ WHERE
 
 
 Ahorro (%) = ((Bytes sin optimizar-Bytes optimizados) / Bytes sin optimizar)* 100 = ((11.85 - 6.99)/11.85)*100= 41 %
+
+Podemos observar que la tabla no optimizada, obviamente, procesa muchos mas bytes. Si procedemos a utilizar la tabla optimizada, el ahorro de bytes corresponde a un 41% respecto al valor inicial. 
 
 
 ### Ejercicio 4: Smart Caching (Vistes Materialitzades)
@@ -104,6 +107,7 @@ INNER JOIN `sprint3-analytics-mica.sprint3_silver.users_combined` AS u
 ON v.user_id = u.user_id
 ORDER BY v.despesa_total DESC;
 ```
+<img width="1470" height="920" alt="Captura de pantalla 2026-11-25 a las 11 23 34" src="https://github.com/user-attachments/assets/41dc94d4-fdd9-46bc-ad18-beecc204674a" />
 
 
 ### EJERCICIO 2: Anàlisi de Tendències (Window Functions sobre Vistes)
@@ -130,8 +134,12 @@ FROM daily_comparison
 ORDER BY Data;
 ```
 
+<img width="1470" height="920" alt="Captura de pantalla 2026-11-25 a las 12 07 11" src="https://github.com/user-attachments/assets/426a903e-eb2a-4b30-bdf7-e04f324c2fc3" />
+
+
 ### EJERCICIO 3: Totals Acumulats (Running Totals sobre Vistes)
 
+<img width="1470" height="920" alt="Captura de pantalla 2026-11-25 a las 12 15 55" src="https://github.com/user-attachments/assets/a8b29d3e-7c81-441f-bc6a-38f527700929" />
 
 
 ### EJERCICIO 4:
@@ -189,6 +197,14 @@ ORDER BY
 ```
 
 Tenemos tres apartados del anterior comando de SQL:
+- la creación de una tabla donde solo se identifiquen las tres primeras compras, utilizamos funciones coo ROW_NUMBER(), PARTITION y QUALIFY (filtrando filas antes de calcular medias para ahorrar bytes)
+- la creación de las métricas de los usuarios donde indicamos el máximo de cada uno, dada la primera CTE creada y teniendo en cuenta que solo los usuarios con 3 registros de compras podrán participar en esta evaluación.
+- la representación final de la consulta donde utilizamos las columnas indicadas en el ejercicio.
+
+<img width="1470" height="920" alt="Captura de pantalla 2026-11-25 a las 22 23 11" src="https://github.com/user-attachments/assets/db5055ee-719c-4d43-bb04-3a794fc3e51e" />
+
+<img width="1470" height="920" alt="Captura de pantalla 2026-11-25 a las 22 23 51" src="https://github.com/user-attachments/assets/fca1230f-d1a0-43af-a240-0321924211ab" />
+
 
 
 
