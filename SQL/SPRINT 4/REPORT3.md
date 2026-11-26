@@ -228,7 +228,23 @@ Comprobación de orden de productos por transacciones:
 
 <img width="654" height="405" alt="Captura de pantalla 2026-11-26 a las 11 49 50" src="https://github.com/user-attachments/assets/e2f22ccb-ad19-4c30-8873-d815e8699323" />
 
-<img width="1470" height="920" alt="Captura de pantalla 2026-11-26 a las 11 51 53" src="https://github.com/user-attachments/assets/382a4a30-e391-4bd7-b7d1-18e3252c2845" />
+<img width="1470" height="920" alt="Captura de pantalla 2026-11-26 a las 15 58 49" src="https://github.com/user-attachments/assets/aa7db8bd-291e-4f48-b6ae-3250eeeb3916" />
+
+<img width="1470" height="920" alt="Captura de pantalla 2026-11-26 a las 15 59 35" src="https://github.com/user-attachments/assets/f389c27b-9b34-4dcd-b5a6-74a15df6cc6f" />
+
+En cuanto al Dashboard, se ha creado tarjetas KPI, gráficas de seguimiento de ventas y un mapa de color:
+
+<img width="1470" height="920" alt="Captura de pantalla 2026-11-26 a las 16 05 52" src="https://github.com/user-attachments/assets/ad2f4ca2-d7cd-4712-94b5-c9f164f19001" />
+
+<img width="795" height="596" alt="Captura de pantalla 2026-11-26 a las 16 02 29" src="https://github.com/user-attachments/assets/832144a2-0d03-495e-a1b0-863af439eacd" />
+
+LINK VISUALIZACION:
+
+https://datastudio.google.com/reporting/527d4785-7d4e-417e-a40c-0d8fecebc010 
+
+Como comentario final, me gustaria decir que usar Looker es como utilizar Power BI y se que podrían mejorarse más cosas pero ya no tengo mucho tiempo para mirármelo a detalle... Gracias :)
+
+
 
 
 
